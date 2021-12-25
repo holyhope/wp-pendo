@@ -28,6 +28,10 @@ function wppendo_script_url( $region, $api_key ) {
  * Get the data of the current visitor.
  */
 function wppendo_current_visitor() {
+	if ( ! is_user_logged_in() ) {
+		return array();
+	}
+
 	$user = wp_get_current_user();
 
 	return apply_filters(
@@ -65,6 +69,11 @@ add_action( 'init', 'wppendo_register_scripts' );
  * Enqueue Pendo scripts for public pages.
  */
 function wppendo_enqueue_scripts() {
+	// check user capabilities.
+	if ( current_user_can( 'wppendo_ignored' ) ) {
+		return;
+	}
+
 	$options = get_option( 'wppendo_snippet_options' );
 	if ( empty( $options['api_key'] ) ) {
 		return;
