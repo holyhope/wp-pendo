@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore Squiz.Commenting.FileComment.Missing
 /**
  * Plugin Name:     WP Pendo
  * Plugin URI:      https://github.com/holyhope/wp-pendo
@@ -12,56 +12,79 @@
  * @package         Wp_Pendo
  */
 
-include_once 'settings.php';
+require_once 'settings.php';
 
-function wppendo_script_url( $region, $apiKey ) {
-    return apply_filters( 'wppendo_script_url', "https://cdn.${region}.pendo.io/agent/static/${apiKey}/pendo.js" );
+/**
+ * Get url of the pendo script.
+ *
+ * @param array $region   The Pendo region to get script from.
+ * @param array $api_key  The Pendo API key.
+ */
+function wppendo_script_url( $region, $api_key ) {
+	return apply_filters( 'wppendo_script_url', "https://cdn.${region}.pendo.io/agent/static/${api_key}/pendo.js" );
 }
 
-function wppendo_visitor() {
-    $user = wp_get_current_user();
+/**
+ * Get the data of the current visitor.
+ */
+function wppendo_current_visitor() {
+	$user = wp_get_current_user();
 
-    return apply_filters( 'wppendo_visitor_data', array(
-        'id'        => $user->ID,
-        'role'      => isset( $user->roles[0] ) ? $user->roles[0] : 'visitor',
-        'email'     => $user->user_email,
-        'full_name' => $user->display_name,
-    ) );
+	return apply_filters(
+		'wppendo_visitor_data',
+		array(
+			'id'        => $user->ID,
+			'roles'     => $user->roles,
+			'email'     => $user->user_email,
+			'full_name' => $user->display_name,
+		)
+	);
 }
 
+/**
+ * Register Pendo scripts.
+ */
 function wppendo_register_scripts() {
-    $options = get_option( 'wppendo_snippet_options' );
+	$options = get_option( 'wppendo_snippet_options' );
 
-    $url = wppendo_script_url( $options['region'], $options['api_key'] );
-    wp_register_script( 'pendo', $url, array(), '0.1.0', true );
+	$url = wppendo_script_url( $options['region'], $options['api_key'] );
+	wp_register_script( 'pendo', $url, array(), '0.1.0', true );
 
-    $settings = wp_json_encode( array(
-        'visitor'       => wppendo_visitor(),
-        'disableGuides' => false,
-    ) );
-    wp_add_inline_script( 'pendo', "pendo.initialize($settings)" );
+	$settings = wp_json_encode(
+		array(
+			'visitor'       => wppendo_current_visitor(),
+			'disableGuides' => false,
+		)
+	);
+	wp_add_inline_script( 'pendo', "pendo.initialize($settings)" );
 }
 
 add_action( 'init', 'wppendo_register_scripts' );
 
+/**
+ * Enqueue Pendo scripts for public pages.
+ */
 function wppendo_enqueue_scripts() {
-    $options = get_option( 'wppendo_snippet_options' );
-    if ( empty( $options['api_key'] ) ) {
-        return;
-    }
+	$options = get_option( 'wppendo_snippet_options' );
+	if ( empty( $options['api_key'] ) ) {
+		return;
+	}
 
-    wp_enqueue_script( 'pendo' );
+	wp_enqueue_script( 'pendo' );
 }
 
 add_action( 'wp_enqueue_scripts', 'wppendo_enqueue_scripts' );
 
-function wppendo_admin_register_scripts() {
-    $adminTrackingEnabled = get_option( 'wppendo_admin_tracking' );
+/**
+ * Enqueue Pendo scripts for admin pages.
+ */
+function wppendo_admin_enqueue_scripts() {
+	$admin_tracking_enabled = get_option( 'wppendo_admin_tracking', false );
 
-    if ( $adminTrackingEnabled ) {
-        add_action( 'login_enqueue_scripts', 'wppendo_enqueue_scripts' );
-        add_action( 'admin_enqueue_scripts', 'wppendo_enqueue_scripts' );
-    }
+	if ( $admin_tracking_enabled ) {
+		add_action( 'login_enqueue_scripts', 'wppendo_enqueue_scripts' );
+		add_action( 'admin_enqueue_scripts', 'wppendo_enqueue_scripts' );
+	}
 }
 
-add_action( 'init', 'wppendo_admin_register_scripts' );
+add_action( 'init', 'wppendo_admin_enqueue_scripts' );
