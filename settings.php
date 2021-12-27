@@ -25,14 +25,14 @@ function wppendo_settings_init() {
 
 	add_settings_section(
 		'wppendo_section_global',
-		__( 'Global configuration', 'wppendo' ),
+		__( 'Global configuration', 'wp-pendo' ),
 		'wppendo_section_global_callback',
 		'wppendo-page'
 	);
 
 	add_settings_field(
 		'wppendo_field_admin_pages',
-		__( 'Track admin pages', 'wppendo' ),
+		__( 'Track admin pages', 'wp-pendo' ),
 		'wppendo_field_admin_pages_cb',
 		'wppendo-page',
 		'wppendo_section_global',
@@ -44,7 +44,7 @@ function wppendo_settings_init() {
 
 	add_settings_field(
 		'wppendo_field_hidden_roles',
-		__( 'Ignore visitors with role', 'wppendo' ),
+		__( 'Ignore visitors with role', 'wp-pendo' ),
 		'wppendo_field_hidden_roles_cb',
 		'wppendo-page',
 		'wppendo_section_global',
@@ -69,14 +69,14 @@ function wppendo_settings_init() {
 
 	add_settings_section(
 		'wppendo_section_snippet',
-		__( 'Snippet configuration', 'wppendo' ),
+		__( 'Snippet configuration', 'wp-pendo' ),
 		'wppendo_section_snippet_callback',
 		'wppendo-page'
 	);
 
 	add_settings_field(
 		'wppendo_field_region',
-		__( 'Region', 'wppendo' ),
+		__( 'Region', 'wp-pendo' ),
 		'wppendo_field_region_cb',
 		'wppendo-page',
 		'wppendo_section_snippet',
@@ -88,7 +88,7 @@ function wppendo_settings_init() {
 
 	add_settings_field(
 		'wppendo_field_api_key',
-		__( 'API key', 'wppendo' ),
+		__( 'API key', 'wp-pendo' ),
 		'wppendo_field_api_key_cb',
 		'wppendo-page',
 		'wppendo_section_snippet',
@@ -120,7 +120,7 @@ function wppendo_sanitize_tracking( $options ) {
 			add_settings_error(
 				'wppendo_messages',
 				'invalid_roles_list',
-				__( 'Invalid roles list', 'wppendo' ),
+				__( 'Invalid roles list', 'wp-pendo' ),
 				'error'
 			);
 		}
@@ -151,7 +151,7 @@ function wppendo_sanitize_tracking( $options ) {
 			'wppendo_messages',
 			'unknown_roles',
 			/* translators: list of unknown roles */
-			sprintf( _n( 'Unknown role: %s', 'Unknown roles: %s', count( $invalid_roles ), 'wppendo' ), implode( ', ', $invalid_roles ) ),
+			sprintf( _n( 'Role %s does not exist.', 'Roles %s do not exist.', count( $invalid_roles ), 'wp-pendo' ), implode( ', ', $invalid_roles ) ),
 			'error'
 		);
 	}
@@ -174,7 +174,7 @@ function wppendo_sanitize_snippet_options( $options ) {
 	$valid_regions = wppendo_valid_regions();
 
 	if ( ! isset( $valid_regions[ $region ] ) ) {
-		add_settings_error( 'wppendo_messages', 'settings_updated', __( 'Invalid region', 'wppendo' ), 'error' );
+		add_settings_error( 'wppendo_messages', 'settings_updated', __( 'Invalid region', 'wp-pendo' ), 'error' );
 
 		$region = 'eu';
 	}
@@ -193,8 +193,8 @@ function wppendo_valid_regions() {
 	return apply_filters(
 		'wppendo_valid_regions',
 		array(
-			'eu' => __( 'Europe', 'wppendo' ),
-			'us' => __( 'United States', 'wppendo' ),
+			'eu' => __( 'Europe', 'wp-pendo' ),
+			'us' => __( 'United States', 'wp-pendo' ),
 		)
 	);
 }
@@ -204,7 +204,7 @@ function wppendo_valid_regions() {
  * Add updated settings message.
  */
 function wppendo_add_updated_message() {
-	add_settings_error( 'wppendo_messages', 'settings_updated', __( 'Settings Saved', 'wppendo' ), 'updated' );
+	add_settings_error( 'wppendo_messages', 'settings_updated', __( 'Settings Saved', 'wp-pendo' ), 'updated' );
 }
 
 
@@ -222,7 +222,7 @@ function wppendo_add_updated_message() {
 function wppendo_section_global_callback( $args ) {
 	?>
 	<p id="<?php echo esc_attr( $args['id'] ); ?>">
-		<?php esc_html_e( 'Global settings.', 'wppendo' ); ?>
+		<?php esc_html_e( 'Global settings.', 'wp-pendo' ); ?>
 	</p>
 	<?php
 }
@@ -242,7 +242,7 @@ function wppendo_field_admin_pages_cb( $args ) {
 			value="on"
 			<?php checked( $options['admin_pages'], true ); ?> />
 	<p class="description">
-		<?php esc_html_e( 'Check the box if you want to track user on administration pages.', 'wppendo' ); ?>
+		<?php esc_html_e( 'Check the box if you want to track user on administration pages.', 'wp-pendo' ); ?>
 	</p>
 	<?php
 }
@@ -276,7 +276,7 @@ function wppendo_field_hidden_roles_cb( $args ) {
 		<?php endforeach; ?>
 	</ul>
 	<p class="description">
-		<?php esc_html_e( 'Select roles you do not want to track.', 'wppendo' ); ?>
+		<?php esc_html_e( 'Select roles you do not want to track.', 'wp-pendo' ); ?>
 	</p>
 	<?php
 }
@@ -290,7 +290,7 @@ function wppendo_field_hidden_roles_cb( $args ) {
 function wppendo_section_snippet_callback( $args ) {
 	?>
 	<p id="<?php echo esc_attr( $args['id'] ); ?>">
-		<?php esc_html_e( 'Customize snippet settings.', 'wppendo' ); ?>
+		<?php esc_html_e( 'Customize snippet settings.', 'wp-pendo' ); ?>
 	</p>
 	<?php
 }
@@ -316,7 +316,7 @@ function wppendo_field_region_cb( $args ) {
 		<?php endforeach; ?>
 	</select>
 	<p class="description">
-		<?php esc_html_e( 'Select the region of your Pendo account.', 'wppendo' ); ?>
+		<?php esc_html_e( 'Select the region of your Pendo account.', 'wp-pendo' ); ?>
 	</p>
 	<?php
 }
@@ -334,7 +334,7 @@ function wppendo_field_api_key_cb( $args ) {
 			value="<?php echo esc_attr( $options[ $args['label_for'] ] ); ?>"
 			name="wppendo_snippet_options[<?php echo esc_attr( $args['label_for'] ); ?>]" />
 	<p class="description">
-		<?php esc_html_e( 'The key used to fetch Pendo script.', 'wppendo' ); ?>
+		<?php esc_html_e( 'The key used to fetch Pendo script.', 'wp-pendo' ); ?>
 	</p>
 	<?php
 }
@@ -345,8 +345,8 @@ function wppendo_field_api_key_cb( $args ) {
  */
 function wppendo_options_page() {
 	add_options_page(
-		__( 'Pendo settings', 'wppendo' ),
-		__( 'Pendo', 'wppendo' ),
+		__( 'Pendo settings', 'wp-pendo' ),
+		__( 'Pendo', 'wp-pendo' ),
 		'manage_options',
 		'wppendo',
 		'wppendo_options_page_html'
@@ -394,7 +394,7 @@ function wppendo_options_page_html() {
  * @param array $links   The list of links related to the plugin.
  */
 function wppendo_add_settings_link( $links ) {
-	$settings_link = '<a href="options-general.php?page=wppendo">' . __( 'Settings', 'wppendo' ) . '</a>';
+	$settings_link = '<a href="options-general.php?page=wppendo">' . __( 'Settings', 'wp-pendo' ) . '</a>';
 
 	array_unshift( $links, $settings_link );
 

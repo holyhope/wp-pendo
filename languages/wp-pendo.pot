@@ -1,0 +1,132 @@
+# Copyright (C) 2021 Pierre PÉRONNET
+# This file is distributed under the same license as the WP Pendo package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Pendo 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-pendo\n"
+"POT-Creation-Date: 2021-12-27 16:48:45+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: settings.php:28
+msgid "Global configuration"
+msgstr ""
+
+#: settings.php:35
+msgid "Track admin pages"
+msgstr ""
+
+#: settings.php:47
+msgid "Ignore visitors with role"
+msgstr ""
+
+#: settings.php:72
+msgid "Snippet configuration"
+msgstr ""
+
+#: settings.php:79
+msgid "Region"
+msgstr ""
+
+#: settings.php:91
+msgid "API key"
+msgstr ""
+
+#: settings.php:123
+msgid "Invalid roles list"
+msgstr ""
+
+#: settings.php:154
+#. translators: list of unknown roles
+msgid "Role %s does not exist."
+msgid_plural "Roles %s do not exist."
+msgstr[0] ""
+msgstr[1] ""
+
+#: settings.php:177
+msgid "Invalid region"
+msgstr ""
+
+#: settings.php:196
+msgid "Europe"
+msgstr ""
+
+#: settings.php:197
+msgid "United States"
+msgstr ""
+
+#: settings.php:207
+msgid "Settings Saved"
+msgstr ""
+
+#: settings.php:225
+msgid "Global settings."
+msgstr ""
+
+#: settings.php:245
+msgid "Check the box if you want to track user on administration pages."
+msgstr ""
+
+#: settings.php:279
+msgid "Select roles you do not want to track."
+msgstr ""
+
+#: settings.php:293
+msgid "Customize snippet settings."
+msgstr ""
+
+#: settings.php:319
+msgid "Select the region of your Pendo account."
+msgstr ""
+
+#: settings.php:337
+msgid "The key used to fetch Pendo script."
+msgstr ""
+
+#: settings.php:348
+msgid "Pendo settings"
+msgstr ""
+
+#: settings.php:349
+msgid "Pendo"
+msgstr ""
+
+#: settings.php:397
+msgid "Settings"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Pendo"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/wp-pendo"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Enable pendo.io on your blog"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Pierre PÉRONNET"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/holyhope"
+msgstr ""
