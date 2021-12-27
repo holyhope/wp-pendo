@@ -14,6 +14,7 @@
 
 require_once 'settings.php';
 
+
 /**
  * Get url of the pendo script.
  *
@@ -23,6 +24,7 @@ require_once 'settings.php';
 function wppendo_script_url( $region, $api_key ) {
 	return apply_filters( 'wppendo_script_url', "https://cdn.${region}.pendo.io/agent/static/${api_key}/pendo.js" );
 }
+
 
 /**
  * Get the data of the current visitor.
@@ -45,6 +47,7 @@ function wppendo_current_visitor() {
 	);
 }
 
+
 /**
  * Register Pendo scripts.
  */
@@ -65,6 +68,7 @@ function wppendo_register_scripts() {
 
 add_action( 'init', 'wppendo_register_scripts' );
 
+
 /**
  * Enqueue Pendo scripts for public pages.
  */
@@ -84,6 +88,7 @@ function wppendo_enqueue_scripts() {
 
 add_action( 'wp_enqueue_scripts', 'wppendo_enqueue_scripts' );
 
+
 /**
  * Enqueue Pendo scripts for admin pages.
  */
@@ -97,3 +102,15 @@ function wppendo_admin_enqueue_scripts() {
 }
 
 add_action( 'init', 'wppendo_admin_enqueue_scripts' );
+
+
+/**
+ * Initialize admin side.
+ */
+function wppendo_admin_init() {
+	$plugin_name = plugin_basename( __FILE__ );
+
+	add_filter( "plugin_action_links_$plugin_name", 'wppendo_add_settings_link' );
+}
+
+add_action( 'admin_init', 'wppendo_admin_init' );

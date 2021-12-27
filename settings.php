@@ -386,3 +386,17 @@ function wppendo_options_page_html() {
 	</div>
 	<?php
 }
+
+
+/**
+ * Add settings shortcut to plugin links.
+ *
+ * @param array $links   The list of links related to the plugin.
+ */
+function wppendo_add_settings_link( $links ) {
+	$settings_link = '<a href="options-general.php?page=wppendo">' . __( 'Settings', 'wppendo' ) . '</a>';
+
+	array_unshift( $links, $settings_link );
+
+	return $links;
+}
