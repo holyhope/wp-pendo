@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 
 		addtextdomain: {
 			options: {
-				textdomain: 'wp-pendo',
+				textdomain: 'pendhope',
 			},
 			update_all_domains: {
 				options: {
@@ -32,8 +32,8 @@ module.exports = function( grunt ) {
 				options: {
 					domainPath: '/languages',
 					exclude: [ '\.git/*', 'bin/*', 'node_modules/*', 'tests/*' ],
-					mainFile: 'wp-pendo.php',
-					potFilename: 'wp-pendo.pot',
+					mainFile: 'pendhope.php',
+					potFilename: 'pendhope.pot',
 					potHeaders: {
 						poedit: true,
 						'x-poedit-keywordslist': true

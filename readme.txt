@@ -1,4 +1,4 @@
-=== WP Pendo ===
+=== Pendhope ===
 Contributors: holyhope
 Donate link: https://github.com/holyhope/
 Tags: analyze, pendo.io, statistics, tracking
@@ -37,9 +37,9 @@ Create a connected digital experience across web and mobile. [Learn more](https:
 
 [You will need a pendo.io account](https://app.pendo.io/register) to proceed.
 
-1. Upload `wp-pendo` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Navigate to `Settings` > `pendo` and set the Pendo API key.  
+1. Upload `pendhope` folder to the `/wp-content/plugins/` directory.
+1. Activate the plugin through the 'Plugins' menu in WordPress.
+1. Navigate to `Settings` > `pendhope` and set the Pendo API key.  
    The applicaton key is included in the snippet provided on the Install page or in your App Settings. The application key maps the data the agent collects to your app in your Pendo subscription.
 
 == Frequently Asked Questions ==

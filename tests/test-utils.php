@@ -2,7 +2,7 @@
 /**
  * Class HiddenCapabilitiesTest
  *
- * @package Wp_Pendo
+ * @package Pendo
  */
 
 /**
@@ -14,14 +14,14 @@ class UtilsTest extends WP_UnitTestCase {
 	 */
 	public function test_ready_no_args() {
 		update_option(
-			'wppendo_snippet_options',
+			'pendhope_snippet_options',
 			array(
 				'region'  => 'test',
 				'api_key' => 'test-key',
 			)
 		);
 
-		$this->assertTrue( wppendo_is_ready() );
+		$this->assertTrue( pendhope_is_ready() );
 	}
 
 	/**
@@ -29,14 +29,14 @@ class UtilsTest extends WP_UnitTestCase {
 	 */
 	public function test_not_ready_no_args() {
 		update_option(
-			'wppendo_snippet_options',
+			'pendhope_snippet_options',
 			array(
 				'region'  => 'test',
 				'api_key' => '',
 			)
 		);
 
-		$this->assertFalse( wppendo_is_ready() );
+		$this->assertFalse( pendhope_is_ready() );
 	}
 
 	/**
@@ -48,7 +48,7 @@ class UtilsTest extends WP_UnitTestCase {
 			'api_key' => 'test-key',
 		);
 
-		$this->assertTrue( wppendo_is_ready( $options ) );
+		$this->assertTrue( pendhope_is_ready( $options ) );
 	}
 
 	/**
@@ -60,20 +60,20 @@ class UtilsTest extends WP_UnitTestCase {
 			'api_key' => '',
 		);
 
-		$this->assertFalse( wppendo_is_ready( $options ) );
+		$this->assertFalse( pendhope_is_ready( $options ) );
 	}
 
 	/**
 	 * Tests that the plugin is ready to use with a valid configuration.
 	 */
 	public function test_not_ready_empty_options_no_args() {
-		$this->assertFalse( wppendo_is_ready() );
+		$this->assertFalse( pendhope_is_ready() );
 	}
 
 	/**
 	 * Tests that the plugin is not ready to use with an invalid configuration.
 	 */
 	public function test_not_ready_empty_options_with_args() {
-		$this->assertFalse( wppendo_is_ready( array() ) );
+		$this->assertFalse( pendhope_is_ready( array() ) );
 	}
 }

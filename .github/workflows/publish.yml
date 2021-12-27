@@ -18,7 +18,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: package
-          path: wp-pendo-*.tgz
+          path: pendhope-*.tgz
 
   publish:
     needs: build
@@ -36,4 +36,4 @@ jobs:
           draft: true
           prerelease: false
           files: |
-            wp-pendo-*.tgz
+            pendhope-*.tgz

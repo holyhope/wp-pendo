@@ -2,14 +2,14 @@
 /**
  * Class HiddenCapabilitiesTest
  *
- * @package Wp_Pendo
+ * @package Pendo
  */
 
 /**
  * Sample test case.
  */
 class HiddenCapabilitiesTest extends WP_UnitTestCase {
-	const CAPABILITY = 'wppendo_ignored';
+	const CAPABILITY = 'pendhope_ignored';
 
 	/**
 	 * Sets up tests.
@@ -18,24 +18,24 @@ class HiddenCapabilitiesTest extends WP_UnitTestCase {
 		parent::setUp();
 
 		update_option(
-			'wppendo_snippet_options',
+			'pendhope_snippet_options',
 			array(
 				'region'  => 'test',
 				'api_key' => 'invalid-key',
 			)
 		);
 
-		$this->assertTrue( wppendo_is_ready(), 'Test configuration must be ready to use' );
+		$this->assertTrue( pendhope_is_ready(), 'Test configuration must be ready to use' );
 	}
 
 	/**
 	 * Is the current user tracked?
 	 */
 	protected function isCurrentUserTracked() {
-		wppendo_register_scripts();
-		wppendo_enqueue_scripts();
+		pendhope_register_scripts();
+		pendhope_enqueue_scripts();
 
-		return wp_script_is( 'pendo', 'enqueued' );
+		return wp_script_is( 'pendhope', 'enqueued' );
 	}
 
 	/**
