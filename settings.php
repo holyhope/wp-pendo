@@ -16,8 +16,7 @@ function wppendo_settings_init() {
 		'wppendo_tracking',
 		array(
 			'default'           => array(
-				'admin_pages'  => false,
-				'hidden_roles' => array(),
+				'admin_pages' => false,
 			),
 			'show_in_rest'      => false,
 			'sanitize_callback' => 'wppendo_sanitize_tracking',
@@ -158,8 +157,7 @@ function wppendo_sanitize_tracking( $options ) {
 	}
 
 	return array(
-		'admin_pages'  => $admin_pages,
-		'hidden_roles' => $hidden_roles,
+		'admin_pages' => $admin_pages,
 	);
 }
 
@@ -256,25 +254,21 @@ function wppendo_field_admin_pages_cb( $args ) {
  * @param array $args   The field array, defining label_for.
  */
 function wppendo_field_hidden_roles_cb( $args ) {
-	$options   = get_option( 'wppendo_tracking' );
-	$roles     = wp_roles();
-	$need_sync = false;
+	$roles = wp_roles();
 
 	?>
 	<ul id="<?php echo esc_attr( $args['label_for'] ); ?>">
 		<?php
 		foreach ( $roles->roles as $role_name => $role ) :
-			$expected_ignored = in_array( $role_name, $options['hidden_roles'], true );
-			$label_for        = $args['label_for'] . '-' . $role_name;
-			$ignored          = isset( $role['capabilities']['wppendo_ignored'] ) && true === $role['capabilities']['wppendo_ignored'];
-			$need_sync        = $need_sync || ( $expected_ignored && ! $ignored ) || ( $ignored && ! $expected_ignored );
+			$label_for = $args['label_for'] . '-' . $role_name;
+			$ignored   = isset( $role['capabilities']['wppendo_ignored'] ) && true === $role['capabilities']['wppendo_ignored'];
 			?>
 			<li>
 				<input type="checkbox"
 						id="<?php echo esc_attr( $label_for ); ?>"
 						name="wppendo_tracking[<?php echo esc_attr( $args['label_for'] ); ?>][]"
 						value="<?php echo esc_attr( $role_name ); ?>"
-						<?php checked( $expected_ignored, true ); ?> />
+						<?php checked( $ignored, true ); ?> />
 				<label for="<?php echo esc_attr( $label_for ); ?>">
 					<?php echo esc_html( translate_user_role( $role['name'] ) ); ?>
 				</label>
@@ -285,14 +279,6 @@ function wppendo_field_hidden_roles_cb( $args ) {
 		<?php esc_html_e( 'Select roles you do not want to track.', 'wppendo' ); ?>
 	</p>
 	<?php
-	if ( $need_sync ) :
-		?>
-		<p class="description warning">
-			<span class="dashicons dashicons-warning"></span>
-			<?php esc_html_e( 'Some roles are not up to date. Please save settings to fix the issue.', 'wppendo' ); ?>
-		</p>
-		<?php
-	endif;
 }
 
 
