@@ -16,6 +16,20 @@ require_once 'settings.php';
 
 
 /**
+ * Is the plugin ready to use.
+ *
+ * @param array $options   Plugin settings.
+ */
+function wppendo_is_ready( $options = array() ) {
+	if ( empty( $options ) ) {
+		$options = get_option( 'wppendo_snippet_options', array() );
+	}
+
+	return ! empty( $options['api_key'] );
+}
+
+
+/**
  * Get url of the pendo script.
  *
  * @param array $region   The Pendo region to get script from.
@@ -52,7 +66,16 @@ function wppendo_current_visitor() {
  * Register Pendo scripts.
  */
 function wppendo_register_scripts() {
-	$options = get_option( 'wppendo_snippet_options' );
+	$options = get_option(
+		'wppendo_snippet_options',
+		array(
+			'region' => 'eu',
+		)
+	);
+
+	if ( ! wppendo_is_ready( $options ) ) {
+		return;
+	}
 
 	$url = wppendo_script_url( $options['region'], $options['api_key'] );
 	wp_register_script( 'pendo', $url, array(), '0.1.0', true );
@@ -66,11 +89,13 @@ function wppendo_register_scripts() {
 	wp_add_inline_script( 'pendo', "pendo.initialize($settings)" );
 }
 
-add_action( 'init', 'wppendo_register_scripts' );
+add_action( 'wp_enqueue_scripts', 'wppendo_register_scripts' );
+add_action( 'login_enqueue_scripts', 'wppendo_register_scripts' );
+add_action( 'admin_enqueue_scripts', 'wppendo_register_scripts' );
 
 
 /**
- * Enqueue Pendo scripts for public pages.
+ * Enqueue Pendo scripts.
  */
 function wppendo_enqueue_scripts() {
 	// check user capabilities.
@@ -78,8 +103,9 @@ function wppendo_enqueue_scripts() {
 		return;
 	}
 
-	$options = get_option( 'wppendo_snippet_options' );
-	if ( empty( $options['api_key'] ) ) {
+	$options = get_option( 'wppendo_snippet_options', array() );
+
+	if ( ! wppendo_is_ready( $options ) ) {
 		return;
 	}
 
@@ -90,7 +116,7 @@ add_action( 'wp_enqueue_scripts', 'wppendo_enqueue_scripts' );
 
 
 /**
- * Enqueue Pendo scripts for admin pages.
+ * Enqueue Pendo scripts for admin and login pages.
  */
 function wppendo_admin_enqueue_scripts() {
 	$admin_tracking_enabled = get_option( 'wppendo_admin_tracking', false );
