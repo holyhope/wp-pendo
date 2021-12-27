@@ -6,7 +6,8 @@
   "scripts": {
     "start": "grunt default",
     "readme": "grunt readme",
-    "i18n": "grunt i18n"
+    "i18n": "grunt i18n",
+    "postpack": "mkdir -vp \"${TMPDIR-/tmp/}wp-pendo-${npm_package_version}\" && tar -xzvf \"wp-pendo-v${npm_package_version}.tgz\" --exclude='Gruntfile.js' --exclude='package.json' -C \"${TMPDIR-/tmp/}wp-pendo-${npm_package_version}\" && rm -f \"wp-pendo-v${npm_package_version}.tgz\" && tar -czvf \"wp-pendo-v${npm_package_version}.tgz\" -C \"${TMPDIR-/tmp/}wp-pendo-${npm_package_version}\" package"
   },
   "devDependencies": {
     "grunt-cli": "^1.4.3",
