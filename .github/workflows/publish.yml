@@ -17,11 +17,24 @@ jobs:
       - run: yarn pack
       - uses: actions/upload-artifact@v2
         with:
-          name: package
+          name: build
           path: pendhope-*.tgz
 
-  publish:
+  package:
     needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+      - run: "tar --strip-components=1 -xzvf pendhope-*.tgz | zip -@9rv pendhope.zip"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: pendhope.zip
+
+  publish:
+    needs: package
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -36,4 +49,4 @@ jobs:
           draft: true
           prerelease: false
           files: |
-            pendhope-*.tgz
+            pendhope.zip
