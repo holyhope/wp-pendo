@@ -68,5 +68,8 @@ If the user is logged in, the data is then enhanced with wordpress:
 
 == Changelog ==
 
+= 0.2.0 =
+* Change option name
+
 = 0.1.0 =
 * First release

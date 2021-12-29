@@ -12,7 +12,7 @@
  */
 function pendhope_settings_init() {
 	register_setting(
-		'wppendo-page',
+		'pendhope-page',
 		'pendhope_tracking',
 		array(
 			'default'           => array(
@@ -27,14 +27,14 @@ function pendhope_settings_init() {
 		'pendhope_section_global',
 		__( 'Global configuration', 'pendhope' ),
 		'pendhope_section_global_callback',
-		'wppendo-page'
+		'pendhope-page'
 	);
 
 	add_settings_field(
 		'pendhope_field_admin_pages',
 		__( 'Track admin pages', 'pendhope' ),
 		'pendhope_field_admin_pages_cb',
-		'wppendo-page',
+		'pendhope-page',
 		'pendhope_section_global',
 		array(
 			'label_for' => 'admin_pages',
@@ -46,7 +46,7 @@ function pendhope_settings_init() {
 		'pendhope_field_hidden_roles',
 		__( 'Ignore visitors with role', 'pendhope' ),
 		'pendhope_field_hidden_roles_cb',
-		'wppendo-page',
+		'pendhope-page',
 		'pendhope_section_global',
 		array(
 			'label_for' => 'hidden_roles',
@@ -55,7 +55,7 @@ function pendhope_settings_init() {
 	);
 
 	register_setting(
-		'wppendo-page',
+		'pendhope-page',
 		'pendhope_snippet_options',
 		array(
 			'default'           => array(
@@ -71,14 +71,14 @@ function pendhope_settings_init() {
 		'pendhope_section_snippet',
 		__( 'Snippet configuration', 'pendhope' ),
 		'pendhope_section_snippet_callback',
-		'wppendo-page'
+		'pendhope-page'
 	);
 
 	add_settings_field(
 		'pendhope_field_region',
 		__( 'Region', 'pendhope' ),
 		'pendhope_field_region_cb',
-		'wppendo-page',
+		'pendhope-page',
 		'pendhope_section_snippet',
 		array(
 			'label_for' => 'region',
@@ -90,7 +90,7 @@ function pendhope_settings_init() {
 		'pendhope_field_api_key',
 		__( 'API key', 'pendhope' ),
 		'pendhope_field_api_key_cb',
-		'wppendo-page',
+		'pendhope-page',
 		'pendhope_section_snippet',
 		array(
 			'label_for' => 'api_key',
@@ -345,10 +345,10 @@ function pendhope_field_api_key_cb( $args ) {
  */
 function pendhope_options_page() {
 	add_options_page(
-		__( 'Pendo settings', 'pendhope' ),
-		__( 'Pendo', 'pendhope' ),
+		__( 'Pendhope settings', 'pendhope' ),
+		__( 'Pendhope', 'pendhope' ),
 		'manage_options',
-		'wppendo',
+		'pendhope',
 		'pendhope_options_page_html'
 	);
 }
@@ -375,10 +375,10 @@ function pendhope_options_page_html() {
 		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 		<form action="options.php" method="post">
 			<?php
-			// output security fields for the registered setting "wppendo".
-			settings_fields( 'wppendo-page' );
+			// output security fields for the registered setting "pendhope".
+			settings_fields( 'pendhope-page' );
 
-			do_settings_sections( 'wppendo-page' );
+			do_settings_sections( 'pendhope-page' );
 
 			submit_button( 'Save Settings' );
 			?>
@@ -394,7 +394,7 @@ function pendhope_options_page_html() {
  * @param array $links   The list of links related to the plugin.
  */
 function pendhope_add_settings_link( $links ) {
-	$settings_link = '<a href="options-general.php?page=wppendo">' . __( 'Settings', 'pendhope' ) . '</a>';
+	$settings_link = '<a href="options-general.php?page=pendhope">' . __( 'Settings', 'pendhope' ) . '</a>';
 
 	array_unshift( $links, $settings_link );
 

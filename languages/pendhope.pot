@@ -100,19 +100,15 @@ msgid "The key used to fetch Pendo script."
 msgstr ""
 
 #: settings.php:348
-msgid "Pendo settings"
-msgstr ""
-
-#: settings.php:349
-msgid "Pendo"
-msgstr ""
-
-#: settings.php:397
-msgid "Settings"
+msgid "Pendhope settings"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
 msgid "Pendhope"
+msgstr ""
+
+#: settings.php:397
+msgid "Settings"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
