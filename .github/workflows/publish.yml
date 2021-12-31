@@ -1,52 +1,45 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  release:
+    types: [released]
 
 jobs:
-  build:
+  download:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: dsaltares/fetch-gh-release-asset@master
         with:
-          node-version: 17
-      - run: yarn install
-      - run: yarn pack
+          version: tags/${{ github.ref_name }}
+          file: "pendhope.zip"
+          target: "release.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: pendhope-*.tgz
-
-  package:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: build
-      - run: "tar --strip-components=1 -xzvf pendhope-*.tgz | zip -@9rv pendhope.zip"
-      - uses: actions/upload-artifact@v2
-        with:
-          name: package
-          path: pendhope.zip
+          name: release
+          path: release.zip
 
   publish:
-    needs: package
+    needs: download
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
+      - run: "svn co https://plugins.svn.wordpress.org/pendo/"
+      - run: "rm -vrf pendo/tags/${{ github.ref_name }}"
+      - run: "mkdir pendo/tags/${{ github.ref_name }}"
       - uses: actions/download-artifact@v2
         with:
-          name: package
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          generate_release_notes: true
-          draft: true
-          prerelease: false
-          files: |
-            pendhope.zip
+          name: release
+      - run: "unzip -ou release.zip -d pendo/tags/${{ github.ref_name }}"
+      - run: >-
+          cd pendo &&
+          svn status &&
+          svn add --force tags/${{ github.ref_name }}
+      - run: >-
+          cd pendo &&
+          svn commit
+          --username="${WORDPRESS_USER}"
+          --password="${WORDPRESS_PASSWORD}"
+          -m 'Add ${{ github.ref_name }} from ${{ github.sha }}'
+        env:
+          WORDPRESS_PASSWORD: ${{ secrets.WORDPRESS_PASSWORD }}
+          WORDPRESS_USER: holyhope

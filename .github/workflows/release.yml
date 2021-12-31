@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 17
+      - run: yarn install
+      - run: yarn pack
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: pendhope-*.tgz
+
+  package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+      - run: "tar --strip-components=1 -xzvf pendhope-*.tgz | zip -@9rv pendhope.zip"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: pendhope.zip
+
+  publish:
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: package
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+          draft: true
+          prerelease: false
+          files: |
+            pendhope.zip
