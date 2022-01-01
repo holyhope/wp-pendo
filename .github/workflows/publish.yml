@@ -24,7 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: "svn co https://plugins.svn.wordpress.org/pendo/"
-      - run: "rm -vrf pendo/tags/${{ github.ref_name }}"
+      - run: >-
+          cd pendo &&
+          svn rm --force tags/${{ github.ref_name }}
       - run: "mkdir pendo/tags/${{ github.ref_name }}"
       - uses: actions/download-artifact@v2
         with:

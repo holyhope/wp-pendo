@@ -1,0 +1,48 @@
+name: Sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - run: "svn co https://plugins.svn.wordpress.org/pendo/"
+      - run: "rm -rf pendo/trunk"
+      - run: >-
+          cd pendo &&
+          svn rm --force trunk assets
+      - uses: actions/checkout@v2
+        with:
+          path: 'pendo/trunk'
+      - run: >-
+          cd pendo &&
+          mv trunk/assets assets
+      - run: >-
+          cd pendo/trunk &&
+          svn rm --force
+          *.js
+          *.json
+          *.xml
+          .git*
+          .editorconfig
+          .distignore
+          .phpcs.xml
+          .travis.yml
+          bin
+          tests
+      - run: >-
+          cd pendo &&
+          svn status &&
+          svn add --force trunk assets
+      - run: >-
+          cd pendo &&
+          svn commit
+          --username="${WORDPRESS_USER}"
+          --password="${WORDPRESS_PASSWORD}"
+          -m 'Sync from ${{ github.sha }}'
+        env:
+          WORDPRESS_PASSWORD: ${{ secrets.WORDPRESS_PASSWORD }}
+          WORDPRESS_USER: holyhope
