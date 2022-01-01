@@ -27,7 +27,9 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: build
-      - run: "tar --strip-components=1 -xzvf pendhope-*.tgz | zip -@9rv pendhope.zip"
+      - run: >-
+          tar --strip-components=1 -xzvf pendhope-*.tgz
+          | zip -@9rv pendhope.zip
       - uses: actions/upload-artifact@v2
         with:
           name: package

@@ -1,0 +1,25 @@
+name: Test
+
+on: push
+
+jobs:
+  yaml-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Yamllint'
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          config_data: |
+            extends: default
+            rules:
+              document-start:
+                present: false
+              truthy:
+                check-keys: false
+
+  php-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: michaelw90/PHP-Lint@master
