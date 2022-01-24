@@ -1,18 +1,20 @@
 {
   "name": "pendhope",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "main": "Gruntfile.js",
   "author": "Pierre PÉRONNET",
   "scripts": {
     "start": "grunt default",
-    "readme": "grunt readme",
+    "readme": "grunt readme --release-version=$npm_package_version",
     "i18n": "grunt i18n",
+    "prepack": "yarn readme",
     "postpack": "mkdir -vp \"${TMPDIR-/tmp/}pendhope-${npm_package_version}\" && tar -xzvf \"pendhope-v${npm_package_version}.tgz\" --exclude='Gruntfile.js' --exclude='package.json' --strip-components=1 -C \"${TMPDIR-/tmp/}pendhope-${npm_package_version}\" && rm -f \"pendhope-v${npm_package_version}.tgz\" && tar --strip-components=1 -czvf \"pendhope-v${npm_package_version}.tgz\" -C \"${TMPDIR-/tmp/}pendhope-${npm_package_version}\" ."
   },
   "devDependencies": {
     "grunt-cli": "^1.4.3",
     "grunt-wp-i18n": "^1.0.3",
-    "grunt-wp-readme-to-markdown": "^2.1.0"
+    "grunt-wp-readme-to-markdown": "^2.1.0",
+    "mustache": "^4.2.0"
   },
   "files": [
     "assets",

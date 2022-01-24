@@ -5,13 +5,15 @@ Tags: analyze, pendo.io, statistics, tracking
 Requires at least: 4.5
 Tested up to: 5.8.1
 Requires PHP: 5.6
-Stable tag: 0.2.1
+Stable tag: {{release_version}}
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Empower your blog with insights and understand what users are doing during their visit.
 
 == Description ==
+
+[![Test](https://github.com/holyhope/wp-pendo/actions/workflows/test.yml/badge.svg?branch=v{{release_version}})](https://github.com/holyhope/wp-pendo/actions/workflows/test.yml)
 
 # Pendo.io
 
