@@ -13,6 +13,8 @@ Empower your blog with insights and understand what users are doing during their
 
 == Description ==
 
+[![Test](https://github.com/holyhope/wp-pendo/actions/workflows/test.yml/badge.svg?branch=v{{release_version}})](https://github.com/holyhope/wp-pendo/actions/workflows/test.yml)
+
 # Pendo.io
 
 [pendo.io](https://www.pendo.io) is a software that makes your blog better.
