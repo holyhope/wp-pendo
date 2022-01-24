@@ -1,3 +1,5 @@
+var Mustache = require('mustache');
+
 module.exports = function( grunt ) {
 
 	'use strict';
@@ -20,6 +22,13 @@ module.exports = function( grunt ) {
 		},
 
 		wp_readme_to_markdown: {
+			options: {
+				pre_convert: content => {
+					return Mustache.render(content, {
+						release_version: grunt.option('release-version'),
+					});
+				},
+			},
 			your_target: {
 				files: {
 					'README.md': 'readme.txt'

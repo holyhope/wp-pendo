@@ -5,7 +5,7 @@
 **Requires at least:** 4.5  
 **Tested up to:** 5.8.1  
 **Requires PHP:** 5.6  
-**Stable tag:** 0.1.0  
+**Stable tag:** 0.2.1  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -68,5 +68,12 @@ If the user is logged in, the data is then enhanced with wordpress:
 
 ## Changelog ##
 
+### 0.2.1 ###
+* Add sync action from github.com to wordpress.org.
+* Add linters to continous integration.
+
+### 0.2.0 ###
+* Change option name.
+
 ### 0.1.0 ###
-* First release
+* First release.
