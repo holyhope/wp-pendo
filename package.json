@@ -1,6 +1,6 @@
 {
   "name": "pendhope",
-  "version": "0.2.1",
+  "version": "latest",
   "main": "Gruntfile.js",
   "author": "Pierre PÉRONNET",
   "scripts": {
