@@ -25,8 +25,10 @@ jobs:
     steps:
       - run: "svn co https://plugins.svn.wordpress.org/pendo/"
       - run: >-
-          cd pendo &&
-          svn rm --force tags/${{ github.ref_name }}
+          test ! -d "tags/${{ github.ref_name }}" || (
+            cd pendo &&
+            svn rm --force "tags/${{ github.ref_name }}"
+          )
       - run: "mkdir pendo/tags/${{ github.ref_name }}"
       - uses: actions/download-artifact@v2
         with:
