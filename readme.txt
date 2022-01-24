@@ -70,6 +70,10 @@ If the user is logged in, the data is then enhanced with wordpress:
 
 == Changelog ==
 
+= 0.2.2 =
+* Add test badge to readme.
+* Generate package version from git tag.
+
 = 0.2.1 =
 * Add sync action from github.com to wordpress.org.
 * Add linters to continous integration.
