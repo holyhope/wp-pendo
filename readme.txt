@@ -1,5 +1,5 @@
-=== Pendhope ===
-Contributors: holyhope
+=== Pendhope US ===
+Contributors: holyhope, seanmrice (US Specific Updates)
 Donate link: https://github.com/holyhope/
 Tags: analyze, pendo.io, statistics, tracking
 Requires at least: 4.5
