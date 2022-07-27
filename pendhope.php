@@ -36,7 +36,12 @@ function pendhope_is_ready( $options = array() ) {
  * @param array $api_key  The Pendo API key.
  */
 function pendhope_script_url( $region, $api_key ) {
-	return apply_filters( 'pendhope_script_url', "https://cdn.${region}.pendo.io/agent/static/${api_key}/pendo.js" );
+    if ($region == 'us') {
+        return apply_filters( 'pendhope_script_url', "https://cdn.pendo.io/agent/static/${api_key}/pendo.js" );
+    }
+    else {
+        return apply_filters( 'pendhope_script_url', "https://cdn.${region}.pendo.io/agent/static/${api_key}/pendo.js" );
+    }
 }
 
 
