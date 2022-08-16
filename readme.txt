@@ -1,4 +1,4 @@
-=== Pendhope US ===
+=== Pendhope ===
 Contributors: holyhope, seanmrice (US Specific Updates)
 Donate link: https://github.com/holyhope/
 Tags: analyze, pendo.io, statistics, tracking
