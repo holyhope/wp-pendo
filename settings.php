@@ -7,6 +7,14 @@
  * These functions could be run multiple times; this would result in a fatal error.
  */
 
+
+/**
+ * Define constant for each available region
+ */
+define( 'PENDHOPE_US_REGION', 'us');
+define( 'PENDHOPE_EU_REGION', 'eu');
+
+
 /**
  * Custom option and settings
  */
@@ -59,7 +67,7 @@ function pendhope_settings_init() {
 		'pendhope_snippet_options',
 		array(
 			'default'           => array(
-				'region'  => 'eu',
+				'region'  => PENDHOPE_EU_REGION,
 				'api_key' => '',
 			),
 			'show_in_rest'      => false,
@@ -168,7 +176,7 @@ function pendhope_sanitize_tracking( $options ) {
  * @param array $options   The settings value.
  */
 function pendhope_sanitize_snippet_options( $options ) {
-	$region  = empty( $options['region'] ) ? 'eu' : strval( $options['region'] );
+	$region  = empty( $options['region'] ) ? PENDHOPE_EU_REGION : strval( $options['region'] );
 	$api_key = empty( $options['api_key'] ) ? '' : strval( $options['api_key'] );
 
 	$valid_regions = pendhope_valid_regions();
@@ -176,7 +184,7 @@ function pendhope_sanitize_snippet_options( $options ) {
 	if ( ! isset( $valid_regions[ $region ] ) ) {
 		add_settings_error( 'pendhope_messages', 'settings_updated', __( 'Invalid region', 'pendhope' ), 'error' );
 
-		$region = 'eu';
+		$region = PENDHOPE_EU_REGION;
 	}
 
 	return array(
@@ -193,8 +201,8 @@ function pendhope_valid_regions() {
 	return apply_filters(
 		'pendhope_valid_regions',
 		array(
-			'eu' => __( 'Europe', 'pendhope' ),
-			'us' => __( 'United States', 'pendhope' ),
+			PENDHOPE_EU_REGION => __( 'Europe', 'pendhope' ),
+			PENDHOPE_US_REGION => __( 'United States', 'pendhope' ),
 		)
 	);
 }
