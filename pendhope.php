@@ -7,7 +7,7 @@
  * Author URI:      https://github.com/holyhope
  * Text Domain:     pendo
  * Domain Path:     /languages
- * Version:         0.2.1
+ * Version:         0.2.3
  *
  * @package         Pendo
  */
