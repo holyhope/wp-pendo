@@ -2,6 +2,7 @@
 /**
  * Plugin Name:     Pendhope
  * Plugin URI:      https://github.com/holyhope/wp-pendo
+ * Funding URI:     https://github.com/sponsors/holyhope
  * Description:     Enable pendo.io on your blog
  * Author:          Pierre PÉRONNET
  * Author URI:      https://github.com/holyhope
@@ -144,3 +145,27 @@ function pendhope_admin_init() {
 }
 
 add_action( 'admin_init', 'pendhope_admin_init' );
+
+function pendhope_plugin_action_links( array $links ): array {
+	$plugin_data = get_plugin_data( __FILE__ );
+	
+	if ( ! isset( $plugin_data['Funding URI'] ) ) {
+		return $links;
+	}
+
+    $links[] = '<a target="_blank" href="' . esc_attr( $plugin_data['Funding URI'] ) . '">' . _x( '❤️ Show support', 'In plugin list, link to sponsor the developper', 'pendo' ) . '</a>';
+	
+    return $links;
+}
+
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'pendhope_plugin_action_links', 10, 4 );
+
+function pendhope_extra_funding_uri( array $headers ): array {
+	if ( ! in_array( 'Funding URI', $headers ) ) {
+		$headers[] = 'Funding URI';
+    }
+	
+    return $headers;
+}
+
+add_filter( 'extra_plugin_headers', 'pendhope_extra_funding_uri' );
